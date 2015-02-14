@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.shoki.lib.material.MaterialDialog;
@@ -62,6 +64,20 @@ public class ShokiLibUtilManager {
 	public onDialogChoice mOnDialogChoice;
 
 	MaterialDialog mMaterialDialog;
+	
+	
+	
+	/**
+	 * 키보드 숨기기
+	 * @param context
+	 * @param p1
+	 */
+	public void InputKeybordHidden(Context context , EditText edit){
+		final InputMethodManager imm = (InputMethodManager) context.getSystemService(context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(edit.getWindowToken(), 0);
+	}
+	
+	
 	/**
 	 * 리스트 다이알로그
 	 * @param context
