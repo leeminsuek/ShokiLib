@@ -481,7 +481,6 @@ public class MaterialDialog {
     }
 
     /**
-     * 动态测量listview-Item的高度
      * @param listView
      */
     public static void setListViewHeightBasedOnChildren(ListView listView) {

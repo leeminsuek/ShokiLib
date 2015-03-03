@@ -78,6 +78,7 @@ public class ShokiLibUtilManager {
 	}
 	
 	
+	
 	/**
 	 * 리스트 다이알로그
 	 * @param context
