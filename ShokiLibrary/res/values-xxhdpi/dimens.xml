@@ -1,0 +1,13 @@
+<resources>
+
+    <dimen name="dimen50">150px</dimen>
+    <dimen name="dimen60">180px</dimen>
+    <dimen name="dimen70">210px</dimen>
+    <dimen name="dimen75">225px</dimen>
+    <dimen name="dimen85">255px</dimen>
+    <dimen name="dimen5">15px</dimen>
+    <dimen name="dimen10">30px</dimen>
+    <dimen name="dimen40">120px</dimen>
+    <dimen name="dimen20">60px</dimen>
+
+</resources>
