@@ -73,7 +73,7 @@ public class ShokiLibUtilManager {
 	 * @param p1
 	 */
 	public void InputKeybordHidden(Context context , EditText edit){
-		final InputMethodManager imm = (InputMethodManager) context.getSystemService(context.INPUT_METHOD_SERVICE);
+		final InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(edit.getWindowToken(), 0);
 	}
 	
