@@ -8,6 +8,7 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 
 public class ShokiLibBitmapManager {
+	
 	private static ShokiLibBitmapManager INSTANCE;
 
 	/**

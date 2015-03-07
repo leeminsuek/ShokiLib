@@ -2,6 +2,7 @@ package com.shoki.lib.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,8 +13,13 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.LoadedFrom;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.display.BitmapDisplayer;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.nostra13.universalimageloader.core.imageaware.ImageAware;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.nostra13.universalimageloader.core.process.BitmapProcessor;
 
 public class ShokiLibImageManager {
 
@@ -69,6 +75,31 @@ public class ShokiLibImageManager {
 		return mOption;
 	}
 	
+	
+	/**
+	 * 옵션설정
+	 * @param loding
+	 * @param empty
+	 * @param error
+	 * @param options
+	 */
+	public void setOptions(int loding, int empty, int error, BitmapFactory.Options options) {
+		mOption = new DisplayImageOptions.Builder()
+		.delayBeforeLoading(0)
+		.displayer(new FadeInBitmapDisplayer(500))
+		.showImageOnLoading(loding)
+		.showImageForEmptyUri(empty)
+		.showImageOnFail(error)
+		.decodingOptions(options)
+//		.postProcessor(new BitmapProcessor() {
+//			@Override
+//			public Bitmap process(Bitmap arg0) {
+//				return Bitmap.createScaledBitmap(arg0, 300, 300, false);
+//			}
+//		})
+		.build();
+	}
+	
 	/**
 	 * 옵션 설정
 	 * @param loding
@@ -77,7 +108,8 @@ public class ShokiLibImageManager {
 	 */
 	public void setOptions(int loding, int empty, int error) {
 		mOption = new DisplayImageOptions.Builder()
-		.delayBeforeLoading(1000)
+		.delayBeforeLoading(0)
+		.displayer(new FadeInBitmapDisplayer(500))
 		.showImageOnLoading(loding)
 		.showImageForEmptyUri(empty)
 		.showImageOnFail(error)
@@ -92,7 +124,8 @@ public class ShokiLibImageManager {
 	 */
 	public void setOptions(Drawable loding, Drawable empty, Drawable error) {
 		mOption = new DisplayImageOptions.Builder()
-		.delayBeforeLoading(1000)
+		.delayBeforeLoading(0)
+		.displayer(new FadeInBitmapDisplayer(500))
 		.showImageOnLoading(loding)
 		.showImageForEmptyUri(empty)
 		.showImageOnFail(error)
