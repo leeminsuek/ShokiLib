@@ -184,7 +184,8 @@ public class ShokiLibUtilManager {
 			@Override
 			public void onClick(View v) {
 				materialDialog.dismiss();
-				mOnDialogClick.setOnDialogoskclick();
+				if(mOnDialogClick != null)
+					mOnDialogClick.setOnDialogoskclick();
 			}
 		});
 		materialDialog.show();

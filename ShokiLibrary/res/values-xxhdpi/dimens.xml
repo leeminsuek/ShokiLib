@@ -10,4 +10,7 @@
     <dimen name="dimen40">120px</dimen>
     <dimen name="dimen20">60px</dimen>
 
+    <dimen name="dimen1">3px</dimen>
+    <dimen name="dimen2">6px</dimen>
+    <dimen name="dimen3">9px</dimen>
 </resources>

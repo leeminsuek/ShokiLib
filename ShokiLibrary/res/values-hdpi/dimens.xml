@@ -8,4 +8,8 @@
     <dimen name="dimen10">15px</dimen>
     <dimen name="dimen40">60px</dimen>
     <dimen name="dimen20">30px</dimen>
+    
+    <dimen name="dimen1">1.5px</dimen>
+    <dimen name="dimen2">3px</dimen>
+    <dimen name="dimen3">4.5px</dimen>
 </resources>
