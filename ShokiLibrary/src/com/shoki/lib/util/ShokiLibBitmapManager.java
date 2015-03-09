@@ -4,11 +4,19 @@ import java.io.IOException;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Bitmap.Config;
+import android.graphics.PorterDuff.Mode;
 import android.media.ExifInterface;
 
 public class ShokiLibBitmapManager {
-	
+
 	private static ShokiLibBitmapManager INSTANCE;
 
 	/**
@@ -84,7 +92,7 @@ public class ShokiLibBitmapManager {
 		return b;
 	}
 
- 
+
 	public static Bitmap readImageWithSampling(String imagePath, int targetWidth, int targetHeight, 
 			Bitmap.Config bmConfig) {
 		// Get the dimensions of the bitmap
@@ -107,5 +115,33 @@ public class ShokiLibBitmapManager {
 		Bitmap  orgImage = BitmapFactory.decodeFile(imagePath, bmOptions);
 
 		return orgImage;
+	}
+
+	/**
+	 * 원형 비트맵 변형
+	 * @param bitmap
+	 * @return
+	 */
+	public Bitmap roundedBitmap(Bitmap bitmap) {
+		Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+				bitmap.getHeight(), Config.ARGB_8888);
+		Canvas canvas = new Canvas(output);
+
+		final Paint paint = new Paint();
+		final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+		final RectF rectF = new RectF(rect);
+
+		paint.setAntiAlias(true);
+		canvas.drawARGB(0, 0, 0, 0);
+		paint.setColor(Color.WHITE);
+		// int size = (bitmap.getWidth() / 2);
+		canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2,
+				bitmap.getWidth() / 2, paint);
+
+		paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
+		canvas.drawBitmap(bitmap, rect, rect, paint);
+
+		bitmap.recycle();
+		return output;
 	}
 }

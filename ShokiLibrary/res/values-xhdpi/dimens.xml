@@ -13,4 +13,6 @@
     <dimen name="dimen1">2px</dimen>
     <dimen name="dimen2">4px</dimen>
     <dimen name="dimen3">6px</dimen>
+    
+    <dimen name="dimen180">360px</dimen>
 </resources>

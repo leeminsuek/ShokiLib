@@ -13,5 +13,6 @@
     <dimen name="dimen1">3.75px</dimen>
     <dimen name="dimen2">7.5px</dimen>
     <dimen name="dimen3">11.25px</dimen>
-
+	
+    <dimen name="dimen180">675px</dimen>
 </resources>

@@ -1,5 +1,7 @@
 package com.shoki.lib.util;
 
+import java.util.WeakHashMap;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,10 +11,12 @@ import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
+import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.LoadedFrom;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.BitmapDisplayer;
@@ -59,8 +63,9 @@ public class ShokiLibImageManager {
 	public void init(Context context) {
 		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
 		.threadPriority(Thread.NORM_PRIORITY - 2)
-		.threadPoolSize(3)
-		.memoryCache(new LruMemoryCache(2 * 1024 * 1024))
+		.threadPoolSize(5)
+		
+		.memoryCache(new WeakMemoryCache())
 		.memoryCacheSize(2 * 1024 * 1024)
 		.memoryCacheSizePercentage(3)
 		.denyCacheImageMultipleSizesInMemory()
@@ -86,17 +91,15 @@ public class ShokiLibImageManager {
 	public void setOptions(int loding, int empty, int error, BitmapFactory.Options options) {
 		mOption = new DisplayImageOptions.Builder()
 		.delayBeforeLoading(0)
-		.displayer(new FadeInBitmapDisplayer(500))
+		.displayer(new FadeInBitmapDisplayer(200))
 		.showImageOnLoading(loding)
 		.showImageForEmptyUri(empty)
 		.showImageOnFail(error)
+		.bitmapConfig(Bitmap.Config.RGB_565)
+		.cacheInMemory(true)
+		.imageScaleType (ImageScaleType.EXACTLY)
+		.considerExifParams(true) //roate잡아주는옵션
 		.decodingOptions(options)
-//		.postProcessor(new BitmapProcessor() {
-//			@Override
-//			public Bitmap process(Bitmap arg0) {
-//				return Bitmap.createScaledBitmap(arg0, 300, 300, false);
-//			}
-//		})
 		.build();
 	}
 	
@@ -109,7 +112,7 @@ public class ShokiLibImageManager {
 	public void setOptions(int loding, int empty, int error) {
 		mOption = new DisplayImageOptions.Builder()
 		.delayBeforeLoading(0)
-		.displayer(new FadeInBitmapDisplayer(500))
+		.displayer(new FadeInBitmapDisplayer(200))
 		.showImageOnLoading(loding)
 		.showImageForEmptyUri(empty)
 		.showImageOnFail(error)
@@ -125,7 +128,7 @@ public class ShokiLibImageManager {
 	public void setOptions(Drawable loding, Drawable empty, Drawable error) {
 		mOption = new DisplayImageOptions.Builder()
 		.delayBeforeLoading(0)
-		.displayer(new FadeInBitmapDisplayer(500))
+		.displayer(new FadeInBitmapDisplayer(200))
 		.showImageOnLoading(loding)
 		.showImageForEmptyUri(empty)
 		.showImageOnFail(error)
@@ -142,6 +145,7 @@ public class ShokiLibImageManager {
 	public void displayLoader(String uri, ImageView imageView, setOnImageLoaderListener listener) {
 		
 		mCallbackListener = listener;
+		
 		
 		if(mOption == null) {
 			ImageLoader.getInstance().displayImage(uri, imageView, new ImageLoadingListener() {
