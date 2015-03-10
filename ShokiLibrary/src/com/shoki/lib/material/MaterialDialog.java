@@ -139,6 +139,7 @@ public class MaterialDialog {
         }
         return this;
     }
+    
 
     public MaterialDialog setPositiveButton(int resId, final View.OnClickListener listener) {
         mPositiveButton = new Button(mContext);
@@ -175,6 +176,31 @@ public class MaterialDialog {
         mPositiveButton.setLayoutParams(params);
         mPositiveButton.setBackgroundResource(R.drawable.button);
         mPositiveButton.setTextColor(Color.argb(255, 35, 159, 242));
+        mPositiveButton.setText(text);
+        mPositiveButton.setGravity(Gravity.CENTER);
+        mPositiveButton.setTextSize(14);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        layoutParams.setMargins(dip2px(2), 0, dip2px(12), dip2px(BUTTON_BOTTOM));
+        mPositiveButton.setLayoutParams(layoutParams);
+        mPositiveButton.setOnClickListener(listener);
+        if (isLollipop()) {
+            mPositiveButton.setBackgroundResource(android.R.color.transparent);
+        }
+        return this;
+    }
+    
+    public MaterialDialog setPositiveButton(int color, String text, final View.OnClickListener listener) {
+        mPositiveButton = new Button(mContext);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        mPositiveButton.setLayoutParams(params);
+        mPositiveButton.setBackgroundResource(R.drawable.button);
+        mPositiveButton.setTextColor(color);
         mPositiveButton.setText(text);
         mPositiveButton.setGravity(Gravity.CENTER);
         mPositiveButton.setTextSize(14);
@@ -331,6 +357,7 @@ public class MaterialDialog {
                 mAlertDialog.setOnDismissListener(mOnDismissListener);
             }
         }
+        
 
         public void setTitle(int resId) {
             mTitleView.setText(resId);

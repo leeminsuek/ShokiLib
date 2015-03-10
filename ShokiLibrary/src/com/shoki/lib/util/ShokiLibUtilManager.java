@@ -132,7 +132,41 @@ public class ShokiLibUtilManager {
 		alert.show();
 	}
 	
+	/**
+	 * 제목 메세지 확인,취소 버튼
+	 * @param context
+	 * @param title
+	 * @param message
+	 * @param listener
+	 */
+	public void showDialog(final Context context, String title, String message, int color, onDialogClick listener) {
+		mOnDialogClick =  listener;
+		
+		mMaterialDialog = new MaterialDialog(context);
+		mMaterialDialog.setTitle(title)
+        .setMessage(message)
+        .setPositiveButton(
+            color, "OK", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mMaterialDialog.dismiss();
+                    mOnDialogClick.setOnDialogoskclick();
 
+                }
+            }
+        )
+        .setNegativeButton(
+            "CANCLE", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mMaterialDialog.dismiss();
+                    mOnDialogClick.setOnDialogoskCancleclick();
+                }
+            }
+        )
+        .setCanceledOnTouchOutside(false)
+        .show();
+	}
 	/**
 	 * 제목 메세지 확인,취소 버튼
 	 * @param context
@@ -166,10 +200,33 @@ public class ShokiLibUtilManager {
             }
         )
         .setCanceledOnTouchOutside(false)
-//        .setOnDismissListener(listener)
         .show();
 	}
 	
+	/**
+	 * 확인버튼 다이알로그(타이틀x)
+	 * @param context
+	 * @param message
+	 */
+	public void showDialog(Context context, String btn, String title, String message, int color, onDialogClick listener) {
+		mOnDialogClick = listener;
+		
+		final MaterialDialog materialDialog = new MaterialDialog(context);
+		materialDialog.setMessage(message)
+		.setTitle(title)
+		.setPositiveButton(color, btn, new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				materialDialog.dismiss();
+				if(mOnDialogClick != null)
+					mOnDialogClick.setOnDialogoskclick();
+			}
+		});
+		materialDialog.show();
+	}
+	
+	
+
 	/**
 	 * 확인버튼 다이알로그(타이틀x)
 	 * @param context

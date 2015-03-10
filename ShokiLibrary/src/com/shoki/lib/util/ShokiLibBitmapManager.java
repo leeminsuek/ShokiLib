@@ -141,7 +141,7 @@ public class ShokiLibBitmapManager {
 		paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
 		canvas.drawBitmap(bitmap, rect, rect, paint);
 
-		bitmap.recycle();
+//		bitmap.recycle();
 		return output;
 	}
 }
